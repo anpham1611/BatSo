@@ -2,6 +2,7 @@ package com.apmv.batso.ui.uicontroller;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.apmv.batso.R;
 import com.apmv.batso.ui.activity.MainActivity;
@@ -18,6 +19,12 @@ public class MainActivityUiController implements View.OnClickListener {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.btnInvite)
+    Button btnInvite;
+    @Bind(R.id.btnPlay)
+    Button btnPlay;
+    @Bind(R.id.btnReadMe)
+    Button btnReadMe;
 
     public MainActivityUiController(MainActivity activity) {
         this.activity = activity;
@@ -27,6 +34,9 @@ public class MainActivityUiController implements View.OnClickListener {
 
     private void init() {
         initToolbar();
+        btnInvite.setOnClickListener(this);
+        btnPlay.setOnClickListener(this);
+        btnReadMe.setOnClickListener(this);
     }
 
     private void initToolbar() {
@@ -38,6 +48,18 @@ public class MainActivityUiController implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            case R.id.btnInvite:
+                activity.actionInvite();
+                break;
+
+            case R.id.btnPlay:
+                activity.actionPlay();
+                break;
+
+            case R.id.btnReadMe:
+                activity.actionReadMe();
+                break;
 
             default:
                 activity.onBackPressed();

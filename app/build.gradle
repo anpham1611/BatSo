@@ -52,5 +52,5 @@ dependencies {
 
     compile 'com.android.support:design:23.3.0'
     compile 'com.github.rahatarmanahmed:circularprogressview:2.3.2'
-    compile 'com.android.support:percent:23.1.0'
+    compile 'com.android.support:percent:23.3.0'
 }

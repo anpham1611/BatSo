@@ -52,4 +52,18 @@ public class MainActivity extends PrimaryActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void actionInvite() {
+        Intent intent = new Intent(this, ServerWaitActivity.class);
+        startActivity(intent);
+    }
+
+    public void actionPlay() {
+        Intent intent = new Intent(this, ClientActivity.class);
+        startActivity(intent);
+    }
+
+    public void actionReadMe() {
+        Intent intent = new Intent(this, ReadMeActivity.class);
+        startActivity(intent);
+    }
 }
