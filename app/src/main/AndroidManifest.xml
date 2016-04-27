@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.apmv.batso">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
@@ -12,6 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        tools:replace="android:icon"
         android:theme="@style/PrimaryActivity">
 
         <!-- Custom Meta Data -->
@@ -27,8 +29,6 @@
             android:name="com.apmv.batso.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/PrimaryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,21 +40,22 @@
         <activity
             android:name="com.apmv.batso.ui.activity.ServerWaitActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/PrimaryActivity" />
         <activity
             android:name="com.apmv.batso.ui.activity.ServerActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/PrimaryActivity" />
         <activity
             android:name="com.apmv.batso.ui.activity.ClientActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
+            android:launchMode="singleTask"
             android:theme="@style/PrimaryActivity" />
         <activity
             android:name="com.apmv.batso.ui.activity.ReadMeActivity"
             android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:theme="@style/SecondaryActivity" />
 
     </application>

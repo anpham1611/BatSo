@@ -15,7 +15,7 @@ public class ReadMeActivity extends SecondaryActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_server_wait);
+        setContentView(R.layout.activity_read_me);
 
         mContext = this;
         uiController = new ReadMeActivityUiController(this);
