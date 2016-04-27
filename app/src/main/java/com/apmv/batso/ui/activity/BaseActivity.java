@@ -37,4 +37,8 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
+    public String getStringResource(int strResId) {
+        return getResources().getString(strResId);
+    }
+
 }

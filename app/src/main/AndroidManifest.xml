@@ -24,22 +24,17 @@
             android:value="" />
 
         <activity
-            android:name="com.apmv.batso.ui.activity.SignInActivity"
+            android:name="com.apmv.batso.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/PrimaryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.apmv.batso.ui.activity.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:theme="@style/PrimaryActivity">
         </activity>
 
     </application>

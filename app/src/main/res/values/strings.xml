@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Bắt Số</string>
     <string name="processing">Processing...</string>
+    <string name="title">Ai Nhanh Tay Hơn :D </string>
+    <string name="read_me">Hướng dẫn</string>
+    <string name="invite">Mời bạn chơi</string>
+    <string name="play">Vào chơi</string>
+    <string name="hint_input_code">Nhập CODE người mời chơi</string>
+    <string name="hint_input_amount">Nhập số lượng</string>
 </resources>

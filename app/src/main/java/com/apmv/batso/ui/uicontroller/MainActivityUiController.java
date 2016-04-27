@@ -30,7 +30,7 @@ public class MainActivityUiController implements View.OnClickListener {
     }
 
     private void initToolbar() {
-        toolbar.setTitle("Hello World");
+        toolbar.setTitle(activity.getStringResource(R.string.app_name));
         toolbar.setNavigationIcon(R.drawable.ic_white_back);
         toolbar.setNavigationOnClickListener(this);
     }

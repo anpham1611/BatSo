@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.apmv.batso.ui.activity.MainActivity">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/PrimaryActivity.AppBarOverlay">
@@ -22,20 +20,118 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:gravity="center"
+        android:textSize="@dimen/textXL"
+        android:textColor="@color/red"
+        android:textStyle="bold|italic"
+        android:layout_margin="@dimen/short_margin"
+        android:layout_below="@id/appBarLayout"/>
+
+    <Button
+        android:id="@+id/btnReadMe"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="@color/transparent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/read_me"
+        android:textColor="@color/black_tr8"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/short_margin"
+        android:textSize="@dimen/textS"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"/>
+
+    <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.apmv.batso.ui.activity.MainActivity"
-        tools:showIn="@layout/activity_main">
+        android:layout_below="@id/tvTitle"
+        android:layout_above="@id/btnReadMe">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Hello world!"/>
+        <View
+            android:id="@+id/lineView"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            android:layout_centerInParent="true"/>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/lineView">
 
-</android.support.design.widget.CoordinatorLayout>
+            <EditText
+                android:id="@+id/txtNumber"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="50"
+                android:textSize="@dimen/textM"
+                android:hint="@string/hint_input_amount"
+                android:layout_margin="@dimen/short_margin"
+                android:background="@drawable/bg_input_green"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:inputType="number"
+                android:paddingLeft="@dimen/short_margin"
+                android:paddingRight="@dimen/short_margin"
+                android:layout_centerInParent="true"/>
 
+            <Button
+                android:id="@+id/btnInvite"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textSize="@dimen/textM"
+                android:background="@drawable/bg_button_red"
+                android:layout_below="@id/txtNumber"
+                android:text="@string/invite"
+                android:textColor="@color/blue"
+                android:textAllCaps="false"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="@dimen/button_padding"
+                android:paddingRight="@dimen/button_padding"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/lineView">
+
+            <EditText
+                android:id="@+id/txtCode"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:text=""
+                android:textSize="@dimen/textM"
+                android:background="@drawable/bg_input_green"
+                android:textColor="@color/black"
+                android:hint="@string/hint_input_code"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/short_margin"/>
+
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_button_red"
+                android:layout_below="@id/txtCode"
+                android:text="@string/play"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAllCaps="false"
+                android:textSize="@dimen/textM"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="@dimen/button_padding"
+                android:paddingRight="@dimen/button_padding"/>
+
+        </RelativeLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+
+</android.support.percent.PercentRelativeLayout>
