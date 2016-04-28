@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.apmv.batso.R;
+import com.apmv.batso.helper.Constants;
 import com.apmv.batso.helper.SharedPreferenceUtils;
 import com.apmv.batso.net.NetUtils;
 import com.apmv.batso.net.api.ApiResponse;
@@ -68,6 +69,7 @@ public class MainActivity extends PrimaryActivity {
             return;
         }
         Intent intent = new Intent(this, ClientActivity.class);
+        intent.putExtra(Constants.INPUT_CODE, uiController.getInputCode());
         startActivity(intent);
     }
 

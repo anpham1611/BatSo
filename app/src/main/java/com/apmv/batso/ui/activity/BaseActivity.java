@@ -57,6 +57,10 @@ public abstract class BaseActivity extends FragmentActivity {
         Toast.makeText(BaseActivity.this, getStringResource(strResId), Toast.LENGTH_SHORT).show();
     }
 
+    public void showToastMessage(String message) {
+        Toast.makeText(BaseActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
     public String getStringResource(int strResId) {
         return getResources().getString(strResId);
     }

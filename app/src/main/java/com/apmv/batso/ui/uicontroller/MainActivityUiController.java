@@ -3,6 +3,7 @@ package com.apmv.batso.ui.uicontroller;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.apmv.batso.R;
 import com.apmv.batso.ui.activity.MainActivity;
@@ -25,6 +26,10 @@ public class MainActivityUiController implements View.OnClickListener {
     Button btnPlay;
     @Bind(R.id.btnReadMe)
     Button btnReadMe;
+    @Bind(R.id.txtNumber)
+    EditText txtNumber;
+    @Bind(R.id.txtCode)
+    EditText txtCode;
 
     public MainActivityUiController(MainActivity activity) {
         this.activity = activity;
@@ -65,5 +70,9 @@ public class MainActivityUiController implements View.OnClickListener {
                 activity.onBackPressed();
                 break;
         }
+    }
+
+    public String getInputCode() {
+        return txtCode.getText().toString().trim();
     }
 }

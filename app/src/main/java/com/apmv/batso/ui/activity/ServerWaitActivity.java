@@ -11,6 +11,7 @@ import com.apmv.batso.helper.Constants;
 import com.apmv.batso.helper.Utils;
 import com.apmv.batso.net.api.ApiResponse;
 import com.apmv.batso.net.helper.ApiHelper;
+import com.apmv.batso.ui.listener.Server;
 import com.apmv.batso.ui.uicontroller.ServerWaitActivityUiController;
 
 import java.net.InetAddress;
@@ -25,6 +26,7 @@ public class ServerWaitActivity extends PrimaryActivity {
     private static final String TAG = ServerWaitActivity.class.getSimpleName();
     private ServerWaitActivityUiController uiController;
     private Context mContext;
+    private Server server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,14 @@ public class ServerWaitActivity extends PrimaryActivity {
 
         // Set code
         long ipLong = Utils.ipToLong(ip);
-        long ipLongAndPort = Long.valueOf(String.valueOf(ipLong) + "" + Utils.randomPort());
-        uiController.setCode("" + (ipLongAndPort));
+        int port = Utils.randomPort();
+        long ipLongAndPort = Long.valueOf(String.valueOf(ipLong) + "" + port);
+
+        // For server
+        if (server != null) server.onDestroy();
+        server = new Server(this);
+        server.setPort(port);
+        uiController.setCode(/*"" + (ipLongAndPort)*/getLocalIpAddress() + ":" + port);
     }
 
     public void doGetPublicIp() {
@@ -95,6 +103,12 @@ public class ServerWaitActivity extends PrimaryActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        server.onDestroy();
     }
 
     @Override
