@@ -1,8 +1,5 @@
 package com.apmv.batso.net.helper;
 
-import android.content.Context;
-
-import com.apmv.batso.helper.SharedPreferenceUtils;
 import com.apmv.batso.net.api.ApiClient;
 import com.apmv.batso.net.api.ApiRequest;
 import com.apmv.batso.net.api.ApiResponse;
@@ -26,6 +23,11 @@ public class ApiHelper extends BaseHelper {
         params.put("user_id", exceptId);
         ApiRequest request = new ApiRequest(ApiRequest.Method.POST, getPrefixUrl() + "user_list", params);
         return ApiClient.callInBackground(request);
+    }
+
+    public static final Task<ApiResponse> doGetPublicIp(String url) {
+        ApiRequest request = new ApiRequest(ApiRequest.Method.GET, null, null);
+        return ApiClient.callInBackgroundExternalApi(request, url);
     }
 
 }

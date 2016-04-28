@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.apmv.batso.R;
 import com.apmv.batso.helper.SharedPreferenceUtils;
+import com.apmv.batso.net.NetUtils;
 import com.apmv.batso.net.api.ApiResponse;
 import com.apmv.batso.net.helper.ApiHelper;
 import com.apmv.batso.ui.uicontroller.MainActivityUiController;
@@ -53,11 +54,19 @@ public class MainActivity extends PrimaryActivity {
     }
 
     public void actionInvite() {
+        if (!NetUtils.isConnectInternet) {
+            showToastMessage(R.string.msg_no_internet);
+            return;
+        }
         Intent intent = new Intent(this, ServerWaitActivity.class);
         startActivity(intent);
     }
 
     public void actionPlay() {
+        if (!NetUtils.isConnectInternet) {
+            showToastMessage(R.string.msg_no_internet);
+            return;
+        }
         Intent intent = new Intent(this, ClientActivity.class);
         startActivity(intent);
     }

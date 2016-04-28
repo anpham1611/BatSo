@@ -14,6 +14,7 @@ public class SharedPreferenceUtils {
         prefEditor.commit();
 
     }
+
     public static String getString(String key) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(App.getInstance());
         String content = pref.getString(key, null);

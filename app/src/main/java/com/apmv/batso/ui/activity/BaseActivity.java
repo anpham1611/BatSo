@@ -1,13 +1,29 @@
 package com.apmv.batso.ui.activity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.apmv.batso.R;
+import com.apmv.batso.net.NetUtils;
 import com.apmv.batso.ui.LoadingDialog;
 
 public abstract class BaseActivity extends FragmentActivity {
 
     private LoadingDialog dialogMessage;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NetUtils.registerCheckStateInternetConnection(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        NetUtils.unregisterCheckStateInternetConnection(this);
+    }
 
     public void showLoadingMessage(int strResId) {
         if (isFinishing()) {
@@ -35,6 +51,10 @@ public abstract class BaseActivity extends FragmentActivity {
         } finally {
             dialogMessage = null;
         }
+    }
+
+    public void showToastMessage(int strResId) {
+        Toast.makeText(BaseActivity.this, getStringResource(strResId), Toast.LENGTH_SHORT).show();
     }
 
     public String getStringResource(int strResId) {

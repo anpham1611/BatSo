@@ -20,12 +20,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:layout_below="@id/appBarLayout"
+    <WebView
+        android:id="@+id/webViewReadMe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/textS"
-        android:layout_centerInParent="true"
-        android:text="Coming soon!"/>
+        android:layout_centerInParent="true"/>
 
 </android.support.percent.PercentRelativeLayout>

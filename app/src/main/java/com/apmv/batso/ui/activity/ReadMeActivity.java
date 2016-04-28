@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.apmv.batso.R;
+import com.apmv.batso.helper.Constants;
 import com.apmv.batso.ui.uicontroller.ReadMeActivityUiController;
 
 public class ReadMeActivity extends SecondaryActivity {
@@ -24,6 +25,7 @@ public class ReadMeActivity extends SecondaryActivity {
     }
 
     private void init() {
+        uiController.loadReadMe(Constants.READ_ME_URL);
     }
 
     @Override

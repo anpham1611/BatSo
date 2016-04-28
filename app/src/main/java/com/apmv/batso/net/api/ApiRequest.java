@@ -55,8 +55,8 @@ public class ApiRequest {
         }
     }
 
-    public Request getDownloadS3Request(String url) {
-        return buildDownloadS3Request(url);
+    public Request getExternalApiRequest(String url) {
+        return buildExternalApiRequest(url);
     }
 
     private Request buildGetRequest() {
@@ -90,7 +90,7 @@ public class ApiRequest {
                 .build();
     }
 
-    private Request buildDownloadS3Request(String url) {
+    private Request buildExternalApiRequest(String url) {
         return new Request.Builder()
                 .headers(buildRequestHeaders())
                 .url(url)

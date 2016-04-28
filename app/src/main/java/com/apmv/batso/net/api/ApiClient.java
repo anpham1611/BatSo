@@ -1,23 +1,17 @@
 package com.apmv.batso.net.api;
 
-import android.content.Context;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import bolts.Task;
-import okio.BufferedSink;
-import okio.Okio;
 
 public class ApiClient {
     private static OkHttpClient client = new OkHttpClient();
@@ -49,29 +43,20 @@ public class ApiClient {
         }
     }
 
-    public static Task<ApiResponse> callInBackgroundDownloadVideo(final ApiRequest request, final Context context, final String url) {
+    public static Task<ApiResponse> callInBackgroundExternalApi(final ApiRequest request, final String url) {
         return Task.callInBackground(new Callable<ApiResponse>() {
             @Override
             public ApiResponse call() throws Exception {
-                return ApiClient.callDownloadVideo(request, context, url);
+                return ApiClient.callExternalApi(request, url);
             }
         });
     }
 
-    public static ApiResponse callDownloadVideo(ApiRequest request, Context context, String url) throws ApiError {
+    public static ApiResponse callExternalApi(ApiRequest request, String url) throws ApiError {
         try {
-            Response response = client.newCall(request.getDownloadS3Request(url)).execute();
+            Response response = client.newCall(request.getExternalApiRequest(url)).execute();
             if (response.isSuccessful()) {
-
-                File downloadedFile = new File(context.getCacheDir(), (new Date().getTime()) + ".mp4");
-
-                BufferedSink sink = Okio.buffer(Okio.sink(downloadedFile));
-                sink.writeAll(response.body().source());
-                sink.close();
-
-                ApiResponse apiResponse = new ApiResponse(response);
-                apiResponse.setBody(downloadedFile.getPath());
-                return apiResponse;
+                return new ApiResponse(response);
 
             } else {
                 ApiResponse apiResponse = new ApiResponse(response);

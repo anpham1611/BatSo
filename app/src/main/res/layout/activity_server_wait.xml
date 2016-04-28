@@ -16,4 +16,30 @@
         android:layout_centerInParent="true"
         android:id="@+id/centerImage"
         android:src="@drawable/ic_smartphone"/>
+    <TextView
+        android:id="@+id/tvCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:gravity="center"
+        android:textSize="@dimen/textXL"
+        android:textColor="@color/red"
+        android:background="@drawable/bg_button_red"
+        android:textStyle="bold"
+        android:paddingLeft="@dimen/button_padding"
+        android:paddingRight="@dimen/button_padding"
+        android:paddingTop="@dimen/short_margin"
+        android:paddingBottom="@dimen/short_margin"
+        android:layout_margin="@dimen/short_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black_tr8"
+        android:textSize="@dimen/textS"
+        android:textStyle="italic"
+        android:layout_below="@id/tvCode"
+        android:text="@string/wait_for_connect"/>
 </com.skyfishjy.library.RippleBackground>

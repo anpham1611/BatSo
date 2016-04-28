@@ -2,6 +2,7 @@ package com.apmv.batso.ui.uicontroller;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.apmv.batso.R;
 import com.apmv.batso.ui.activity.ServerWaitActivity;
@@ -21,6 +22,8 @@ public class ServerWaitActivityUiController implements View.OnClickListener {
     RippleBackground rippleBackground;
     @Bind(R.id.centerImage)
     ImageView centerImage;
+    @Bind(R.id.tvCode)
+    TextView tvCode;
 
     public ServerWaitActivityUiController(ServerWaitActivity activity) {
         this.activity = activity;
@@ -42,5 +45,9 @@ public class ServerWaitActivityUiController implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    public void setCode(String code) {
+        tvCode.setText(code);
     }
 }
