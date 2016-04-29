@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.apmv.batso.R;
 import com.apmv.batso.helper.Constants;
@@ -37,7 +38,8 @@ public class ServerWaitActivity extends PrimaryActivity {
         uiController = new ServerWaitActivityUiController(this);
 
         init();
-        doGetPublicIp();
+//        doGetPublicIp();
+        updateCode();
     }
 
     private void init() {
@@ -45,18 +47,17 @@ public class ServerWaitActivity extends PrimaryActivity {
         // String iP = getLocalIpAddress();
     }
 
-    private void updateCode(String ip) {
+    private void updateCode(/*String ip*/) {
 
         // Set code
-        long ipLong = Utils.ipToLong(ip);
+        long ipLong = Utils.ipToLong(getIpAddress());
         int port = Utils.randomPort();
         long ipLongAndPort = Long.valueOf(String.valueOf(ipLong) + "" + port);
 
         // For server
         if (server != null) server.onDestroy();
-        server = new Server(this);
-        server.setPort(port);
-        uiController.setCode(/*"" + (ipLongAndPort)*/getLocalIpAddress() + ":" + port);
+        server = new Server(this, port);
+        uiController.setCode(ipLongAndPort + ":" + port);
     }
 
     public void doGetPublicIp() {
@@ -67,7 +68,7 @@ public class ServerWaitActivity extends PrimaryActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            updateCode(task.getResult().getBody());
+//                            updateCode(task.getResult().getBody());
                         }
                     });
                 }
@@ -76,23 +77,33 @@ public class ServerWaitActivity extends PrimaryActivity {
         });
     }
 
-    public String getLocalIpAddress() {
+    public String getIpAddress() {
+        String ip = "";
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        String ip = Formatter.formatIpAddress(inetAddress.hashCode());
-                        Log.i(TAG, "***** IP="+ ip);
-                        return ip;
+            Enumeration<NetworkInterface> enumNetworkInterfaces = NetworkInterface
+                    .getNetworkInterfaces();
+            while (enumNetworkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = enumNetworkInterfaces
+                        .nextElement();
+                Enumeration<InetAddress> enumInetAddress = networkInterface
+                        .getInetAddresses();
+                while (enumInetAddress.hasMoreElements()) {
+                    InetAddress inetAddress = enumInetAddress
+                            .nextElement();
+
+                    if (inetAddress.isSiteLocalAddress()) {
+                        ip += "\nServer running at: "
+                                + inetAddress.getHostAddress();
                     }
                 }
             }
-        } catch (SocketException ex) {
-            Log.e(TAG, ex.toString());
+
+        } catch (SocketException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            ip += "Something Wrong! " + e.toString() + "\n";
         }
-        return null;
+        return ip;
     }
 
     @Override

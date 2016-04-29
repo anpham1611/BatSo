@@ -17,14 +17,11 @@ public class Server {
     String message = "";
     int socketServerPORT = 8080;
 
-    public Server(PrimaryActivity activity) {
+    public Server(PrimaryActivity activity, int port) {
+        this.socketServerPORT = port;
         this.activity = activity;
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
-    }
-
-    public void setPort(int port) {
-        socketServerPORT = port;
     }
 
     public int getPort() {

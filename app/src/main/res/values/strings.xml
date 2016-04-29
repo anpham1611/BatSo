@@ -9,4 +9,5 @@
     <string name="hint_input_amount">Nhập số lượng</string>
     <string name="wait_for_connect">Chờ người chơi kết nối...</string>
     <string name="msg_no_internet">Bạn không có kết nối Internet! Vui lòng kiểm tra lại.</string>
+    <string name="msg_code_required">Bạn vui lòng nhập CODE để vào chơi nhé!</string>
 </resources>

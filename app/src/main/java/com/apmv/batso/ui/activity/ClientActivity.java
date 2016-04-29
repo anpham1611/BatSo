@@ -27,8 +27,9 @@ public class ClientActivity extends GameActivity {
     }
 
     private void init() {
-        code = getIntent().getStringExtra(Constants.INPUT_CODE);
-        client = new Client(this, "192.168.1.128", Integer.valueOf(code), uiController.getTxtMessage());
+        code = getIntent().getStringExtra(Constants.INPUT_CODE); // Include IP and Port
+
+        client = new Client(this, "10.0.19.68", Integer.parseInt(code), uiController.getTxtMessage());
         client.execute();
     }
 

@@ -68,6 +68,10 @@ public class MainActivity extends PrimaryActivity {
             showToastMessage(R.string.msg_no_internet);
             return;
         }
+        if (uiController.getInputCode().trim().equals("")) {
+            showToastMessage(R.string.msg_code_required);
+            return;
+        }
         Intent intent = new Intent(this, ClientActivity.class);
         intent.putExtra(Constants.INPUT_CODE, uiController.getInputCode());
         startActivity(intent);
