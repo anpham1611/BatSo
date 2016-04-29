@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.apmv.batso.R;
 import com.apmv.batso.helper.Constants;
+import com.apmv.batso.helper.Utils;
 import com.apmv.batso.ui.listener.Client;
 import com.apmv.batso.ui.uicontroller.ClientActivityUiController;
 
@@ -28,9 +29,13 @@ public class ClientActivity extends GameActivity {
 
     private void init() {
         code = getIntent().getStringExtra(Constants.INPUT_CODE); // Include IP and Port
-
-        client = new Client(this, "10.0.19.68", Integer.parseInt(code), uiController.getTxtMessage());
-        client.execute();
+        int length = code.length();
+        if (length > 4) {
+            String ip = code.substring(0, length - 4);
+            String port = code.substring(length - 4, length);
+            client = new Client(this, Utils.longToIp(Long.parseLong(ip)), Integer.parseInt(port), uiController.getTxtMessage());
+            client.execute();
+        }
     }
 
     @Override

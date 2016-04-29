@@ -47,7 +47,7 @@ public class ServerWaitActivity extends PrimaryActivity {
         // String iP = getLocalIpAddress();
     }
 
-    private void updateCode(/*String ip*/) {
+    public void updateCode(/*String ip*/) {
 
         // Set code
         long ipLong = Utils.ipToLong(getIpAddress());
@@ -57,7 +57,7 @@ public class ServerWaitActivity extends PrimaryActivity {
         // For server
         if (server != null) server.onDestroy();
         server = new Server(this, port);
-        uiController.setCode(ipLongAndPort + ":" + port);
+        uiController.setCode(ipLongAndPort + "");
     }
 
     public void doGetPublicIp() {
@@ -92,16 +92,13 @@ public class ServerWaitActivity extends PrimaryActivity {
                             .nextElement();
 
                     if (inetAddress.isSiteLocalAddress()) {
-                        ip += "\nServer running at: "
-                                + inetAddress.getHostAddress();
+                        ip += inetAddress.getHostAddress();
                     }
                 }
             }
 
         } catch (SocketException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
-            ip += "Something Wrong! " + e.toString() + "\n";
         }
         return ip;
     }

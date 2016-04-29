@@ -40,7 +40,8 @@ public class ServerWaitActivityUiController implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.centerImage:
-                activity.doGetPublicIp();
+//                activity.doGetPublicIp();
+                activity.updateCode();
                 break;
 
             default:
