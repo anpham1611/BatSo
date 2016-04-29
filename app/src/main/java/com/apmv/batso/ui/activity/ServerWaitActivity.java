@@ -48,9 +48,11 @@ public class ServerWaitActivity extends PrimaryActivity {
     }
 
     public void updateCode(/*String ip*/) {
+        String ip = getIpAddress();
+        Toast.makeText(this, ip, Toast.LENGTH_SHORT).show();
 
         // Set code
-        long ipLong = Utils.ipToLong(getIpAddress());
+        long ipLong = Utils.ipToLong(ip);
         int port = Utils.randomPort();
         long ipLongAndPort = Long.valueOf(String.valueOf(ipLong) + "" + port);
 
@@ -78,7 +80,6 @@ public class ServerWaitActivity extends PrimaryActivity {
     }
 
     public String getIpAddress() {
-        String ip = "";
         try {
             Enumeration<NetworkInterface> enumNetworkInterfaces = NetworkInterface
                     .getNetworkInterfaces();
@@ -92,7 +93,7 @@ public class ServerWaitActivity extends PrimaryActivity {
                             .nextElement();
 
                     if (inetAddress.isSiteLocalAddress()) {
-                        ip += inetAddress.getHostAddress();
+                        return inetAddress.getHostAddress();
                     }
                 }
             }
@@ -100,7 +101,7 @@ public class ServerWaitActivity extends PrimaryActivity {
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        return ip;
+        return "";
     }
 
     @Override
