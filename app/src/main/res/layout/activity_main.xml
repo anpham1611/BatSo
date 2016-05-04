@@ -106,7 +106,7 @@
                 android:id="@+id/txtCode"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:text=""
+                android:text="167777092"
                 android:textSize="@dimen/textS"
                 android:background="@drawable/bg_input_green"
                 android:textColor="@color/black"

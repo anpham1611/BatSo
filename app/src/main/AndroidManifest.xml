@@ -48,6 +48,11 @@
             android:launchMode="singleTask"
             android:theme="@style/PrimaryActivity" />
         <activity
+            android:name=".ui.activity.ClientWaitActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/PrimaryActivity" />
+        <activity
             android:name="com.apmv.batso.ui.activity.ClientActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"

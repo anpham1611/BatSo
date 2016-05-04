@@ -1,32 +1,31 @@
 package com.apmv.batso.ui.listener;
 
+import android.os.AsyncTask;
+
+import com.apmv.batso.helper.Constants;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import android.os.AsyncTask;
-import android.widget.TextView;
-
-import com.apmv.batso.ui.activity.PrimaryActivity;
-
 /**
  * Created by an.pham1611 on 4/28/16.
  */
 public class Client extends AsyncTask<Void, Void, Void> {
 
-    String dstAddress;
-    int dstPort;
-    String response = "";
-    TextView textResponse;
-    PrimaryActivity activity;
+    private String dstAddress;
+    private int dstPort;
+    private String response = "";
+    private IConnectCallBack listener;
+    private int type, result;
 
-    public Client(PrimaryActivity activity, String addr, int port, TextView textResponse) {
-        dstAddress = addr;
-        dstPort = port;
-        this.textResponse = textResponse;
-        this.activity = activity;
+    public Client(int type, String addr, int port, IConnectCallBack listener) {
+        this.dstAddress = addr;
+        this.dstPort = port;
+        this.listener = listener;
+        this.type = type;
     }
 
     @Override
@@ -50,16 +49,19 @@ public class Client extends AsyncTask<Void, Void, Void> {
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 byteArrayOutputStream.write(buffer, 0, bytesRead);
                 response += byteArrayOutputStream.toString("UTF-8");
+                result = Constants.TYPE_CONNECT_SUCCESS;
             }
 
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             response = "UnknownHostException: " + e.toString();
+            result = Constants.TYPE_CONNECT_FAILED;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             response = "IOException: " + e.toString();
+            result = Constants.TYPE_CONNECT_FAILED;
         } finally {
             if (socket != null) {
                 try {
@@ -75,13 +77,21 @@ public class Client extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                textResponse.setText(response);
-            }
-        });
         super.onPostExecute(result);
+        switch (type) {
+            case Constants.TYPE_CONNECT:
+                switch (this.result) {
+                    case Constants.TYPE_CONNECT_SUCCESS:
+                        listener.onSuccess(response);
+                        break;
+                    case Constants.TYPE_CONNECT_FAILED:
+                        listener.onSuccess(response);
+                        break;
+                }
+                break;
+            case Constants.TYPE_PLAYING:
+                break;
+        }
     }
 
 }
