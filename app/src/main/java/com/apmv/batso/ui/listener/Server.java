@@ -50,9 +50,12 @@ public class Server {
                     SocketServerReplyThread socketServerReplyThread =
                             new SocketServerReplyThread(socket, 0);
                     socketServerReplyThread.run();
+
+                    listener.onSuccess("");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                listener.onFailed(e.getMessage());
             }
         }
     }

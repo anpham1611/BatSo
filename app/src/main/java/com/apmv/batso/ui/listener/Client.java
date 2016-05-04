@@ -49,7 +49,6 @@ public class Client extends AsyncTask<Void, Void, Void> {
                 response += byteArrayOutputStream.toString("UTF-8");
                 result = Constants.TYPE_CONNECT_SUCCESS;
             }
-
         } catch (UnknownHostException e) {
             e.printStackTrace();
             result = Constants.TYPE_CONNECT_FAILED;
