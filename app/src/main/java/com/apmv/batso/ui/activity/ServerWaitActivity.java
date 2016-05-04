@@ -3,15 +3,13 @@ package com.apmv.batso.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.Formatter;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.apmv.batso.R;
 import com.apmv.batso.helper.Constants;
 import com.apmv.batso.helper.Utils;
 import com.apmv.batso.net.api.ApiResponse;
 import com.apmv.batso.net.helper.ApiHelper;
+import com.apmv.batso.ui.listener.IConnectCallBack;
 import com.apmv.batso.ui.listener.Server;
 import com.apmv.batso.ui.uicontroller.ServerWaitActivityUiController;
 
@@ -23,7 +21,7 @@ import java.util.Enumeration;
 import bolts.Continuation;
 import bolts.Task;
 
-public class ServerWaitActivity extends PrimaryActivity {
+public class ServerWaitActivity extends PrimaryActivity implements IConnectCallBack {
     private static final String TAG = ServerWaitActivity.class.getSimpleName();
     private ServerWaitActivityUiController uiController;
     private Context mContext;
@@ -49,7 +47,6 @@ public class ServerWaitActivity extends PrimaryActivity {
 
     public void updateCode(/*String ip*/) {
         String ip = getIpAddress();
-        Toast.makeText(this, ip, Toast.LENGTH_SHORT).show();
 
         // Set code
         long ipLong = Utils.ipToLong(ip);
@@ -58,7 +55,7 @@ public class ServerWaitActivity extends PrimaryActivity {
 
         // For server
         if (server != null) server.onDestroy();
-        server = new Server(this, port);
+        server = new Server(port, this);
         uiController.setCode(ipLongAndPort + "");
     }
 
@@ -125,4 +122,13 @@ public class ServerWaitActivity extends PrimaryActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onSuccess(String response) {
+
+    }
+
+    @Override
+    public void onFailed(String response) {
+
+    }
 }

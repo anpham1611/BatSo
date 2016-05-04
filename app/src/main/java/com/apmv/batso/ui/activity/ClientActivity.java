@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import com.apmv.batso.R;
 import com.apmv.batso.ui.uicontroller.ClientActivityUiController;
-import com.apmv.batso.ui.uicontroller.ClientActivityUiController$$ViewBinder;
-import com.apmv.batso.ui.uicontroller.ServerActivityUiController;
 
 public class ClientActivity extends GameActivity {
     private static final String TAG = ClientActivity.class.getSimpleName();

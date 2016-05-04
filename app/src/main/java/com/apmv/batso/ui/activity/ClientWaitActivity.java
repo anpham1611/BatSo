@@ -34,7 +34,7 @@ public class ClientWaitActivity extends PrimaryActivity implements IConnectCallB
         if (length > 4) {
             String ip = code.substring(0, length - 4);
             String port = code.substring(length - 4, length);
-            client = new Client(Constants.TYPE_CONNECT, Utils.longToIp(Long.parseLong(ip)), Integer.parseInt(port), this);
+            client = new Client(Utils.longToIp(Long.parseLong(ip)), Integer.parseInt(port), this);
             client.execute();
         }
     }

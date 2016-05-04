@@ -1,7 +1,5 @@
 package com.apmv.batso.ui.listener;
 
-import com.apmv.batso.ui.activity.PrimaryActivity;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -12,20 +10,17 @@ import java.net.Socket;
  * Created by an.pham1611 on 4/28/16.
  */
 public class Server {
-    PrimaryActivity activity;
-    ServerSocket serverSocket;
-    String message = "";
-    int socketServerPORT = 8080;
+    private ServerSocket serverSocket;
+    private String message = "";
+    private int socketServerPORT = 8080;
+    private IConnectCallBack listener;
+    private int result;
 
-    public Server(PrimaryActivity activity, int port) {
+    public Server(int port, IConnectCallBack listener) {
         this.socketServerPORT = port;
-        this.activity = activity;
+        this.listener = listener;
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
-    }
-
-    public int getPort() {
-        return socketServerPORT;
     }
 
     public void onDestroy() {
@@ -33,15 +28,12 @@ public class Server {
             try {
                 serverSocket.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
     }
 
     private class SocketServerThread extends Thread {
-
-        int count = 0;
 
         @Override
         public void run() {
@@ -53,25 +45,13 @@ public class Server {
                     // block the call until connection is created and return
                     // Socket object
                     Socket socket = serverSocket.accept();
-                    count++;
-                    message += "#" + count + " from "
-                            + socket.getInetAddress() + ":"
-                            + socket.getPort() + "\n";
 
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            activity.updateServerMessage(message);
-                        }
-                    });
-
+                    // Server Reply
                     SocketServerReplyThread socketServerReplyThread =
-                            new SocketServerReplyThread(socket, count);
+                            new SocketServerReplyThread(socket, 0);
                     socketServerReplyThread.run();
-
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -80,47 +60,26 @@ public class Server {
     private class SocketServerReplyThread extends Thread {
 
         private Socket hostThreadSocket;
-        int cnt;
+        private int selectedNumber;
 
-        SocketServerReplyThread(Socket socket, int c) {
-            hostThreadSocket = socket;
-            cnt = c;
+        public SocketServerReplyThread(Socket socket, int selectedNumber) {
+            this.hostThreadSocket = socket;
+            this.selectedNumber = selectedNumber;
         }
 
         @Override
         public void run() {
             OutputStream outputStream;
-            String msgReply = "Hello from Server, you are #" + cnt;
-
             try {
                 outputStream = hostThreadSocket.getOutputStream();
                 PrintStream printStream = new PrintStream(outputStream);
-                printStream.print(msgReply);
+                printStream.print(String.valueOf(selectedNumber));
                 printStream.close();
 
-                message += "replayed: " + msgReply + "\n";
-
-                activity.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        activity.updateServerMessage(message);
-                    }
-                });
-
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
-                message += "Something wrong! " + e.toString() + "\n";
             }
 
-            activity.runOnUiThread(new Runnable() {
-
-                @Override
-                public void run() {
-                    activity.updateServerMessage(message);
-                }
-            });
         }
 
     }
